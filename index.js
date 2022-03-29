@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config({path:'./.env'});
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}))
 
 // connexion à la DB mongoose
-mongoose.connect('mongodb+srv://sergesgoma:sergesgoma@cluster0.mxqbj.mongodb.net/signupDB?retryWrites=true&w=majority', { useNewUrlParser: true }, { useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true }, { useUnifiedTopology: true });
 
 // création d'un schéma de base de données
 const signupSchema = {
